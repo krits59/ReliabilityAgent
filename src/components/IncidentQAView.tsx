@@ -56,12 +56,17 @@ export function IncidentQAView() {
     setIsLoading(true);
     setQuery('');
 
-    // Simulate AI processing
+    // Check if this is the SLI breach analysis query for extended delay
+    const lowerQuery = query.toLowerCase();
+    const isSLIBreachQuery = lowerQuery.includes('sli breach') && lowerQuery.includes('root cause');
+    const delay = isSLIBreachQuery ? 10000 : 1500; // 10 seconds for SLI breach, 1.5 seconds for others
+    
+    // Simulate AI processing with appropriate delay
     setTimeout(() => {
       const assistantMessage = generateResponse(query);
       setMessages(prev => [...prev, assistantMessage]);
       setIsLoading(false);
-    }, 1500);
+    }, delay);
   };
 
   const generateResponse = (userQuery: string): ChatMessage => {
