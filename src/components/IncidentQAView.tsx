@@ -187,7 +187,14 @@ export function IncidentQAView() {
   };
 
   const handleSampleQuery = (sampleQuery: string) => {
-    setQuery(sampleQuery);
+    if (sampleQuery === "Analyze the SLI breach and figure out the root cause") {
+      const confirmed = window.confirm("Do you want to analyse the SLI breach and root cause for the metric service.latency.avg for auth-service spiked to 420 at 12:30 UTC?");
+      if (confirmed) {
+        setQuery(sampleQuery);
+      }
+    } else {
+      setQuery(sampleQuery);
+    }
   };
 
   const getResultIcon = (type: string) => {
