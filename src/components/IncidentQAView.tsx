@@ -190,7 +190,25 @@ export function IncidentQAView() {
     if (sampleQuery === "Analyze the SLI breach and figure out the root cause") {
       const confirmed = window.confirm("Do you want to analyse the SLI breach and root cause for the metric service.latency.avg for auth-service spiked to 420 at 12:30 UTC?");
       if (confirmed) {
-        setQuery(sampleQuery);
+        setQuery(`The analysis of the auth-service latency spike to 420ms at 12:30 UTC is as follows:
+
+- The observed 420ms latency likely breached the SLI (Service Level Indicator) for this user-facing service.
+
+- The root cause was a NullPointerException in the AuthController caused by improper initialization of the session variable before accessing user data during login. This led to crashes and increased latency.
+
+To resolve the issue and prevent future SLI breaches:
+
+1. Fix the NullPointerException by initializing the session variable properly before accessing user data, as per issue_101 "Null pointer on login".
+
+2. Review and optimize inefficient database queries in AuthController and related classes.
+
+3. Increase the database connection pool size to handle higher concurrency.
+
+4. Implement caching for frequently accessed user data to reduce database load.
+
+5. Monitor auth-service performance and latency metrics after changes to ensure SLIs are met.
+
+By implementing these steps, the NullPointerException should be resolved, auth-service latency should decrease, and potential SLI breaches should be prevented going forward.`);
       }
     } else {
       setQuery(sampleQuery);
