@@ -37,7 +37,8 @@ export function IncidentQAView() {
     "Why did latency spike at 12:30?",
     "What's the MTTR trend this week?",
     "Which services have the most incidents?",
-    "Show me database connection issues"
+    "Show me database connection issues",
+    "Analyze the SLI breach and figure out the root cause"
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
